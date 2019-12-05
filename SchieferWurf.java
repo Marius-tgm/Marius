@@ -67,14 +67,6 @@ public class SchieferWurf{
 		
 		Flightdata data = new Flightdata(velocityZ,velocityX,timeOfFlight,maxHeight,s);		//hier werden die berechneten Daten gespeichert
 		
-		//jetzt gehts mit Arrays los! Es folgt: ein paar Mal in der Sekunde werden die Positionsdaten des punktes gespeichert.
-		
-		//an jedem Ort muss folgendes bekannt sein:
-		//x-pos. z-pos. v0z v0x
-		//also ein array, das auf weitere Zeigt
-		//erste Arrayspalte: Zeiger auf das zweite Array
-		//zweite Arrayspalte: Flugdaten länge 5
-		
 		int placeholder = (int)timeOfFlight*5;
 		
 		double[][] saves = new double[(placeholder+1)][5];		//Praemisse: alle 0.2 s wird was gespeichert
@@ -94,7 +86,7 @@ public class SchieferWurf{
 					}
 					
 				saves[i][1] = velocityX*a; 						//x-pos
-				saves[i][2]	= height + (velocityZ*a)-(0.5*g*a*a);//Geschwindigkeit in z-Richtung
+				saves[i][2]	= height + (velocityZ*a)-(0.5*g*a*a);// z-pos
 				saves[i][3]	= velocityZ-(g*a);					//Geschwindigkeit z-Richtung
 				saves[i][4]	= velocityX;						//Geschwindigkeit in x-Richtung -> konstant
 
