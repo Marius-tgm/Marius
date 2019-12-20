@@ -17,8 +17,6 @@ public class Flightdata extends SchieferWurf{
 	
 	
 	public static void resultsIntoFile(){
-		
-		System.out.println("Das ist ein Test: " + saves[2][3]);
 			
 		try{
 			File dir = new File("Ergebnisordner");
