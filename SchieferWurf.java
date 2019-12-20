@@ -15,6 +15,8 @@ public class SchieferWurf{
 	static double velocityZ;			//Geschwindigkeit in z-Richtung
 	static double velocityX;			//Geschwindigkeit in x-Richtung
 	static double s;					//Wurfweite
+	static double[][] saves = new double[100][5];	//Array fuer die Ergebnisse
+	
 	
 	public static void main(String[] args){
 		
@@ -41,7 +43,7 @@ public class SchieferWurf{
 		Point p1 = new Point(velocityTest,heightTest,angleTest,0); //Uebergabe der Paramter an die Punkt-Klasse, wo diese dann geprüft werden, die 0 ist die x-Pos
 		
 		Berechnung();
-		
+		Flightdata.resultsIntoFile();
 	}
 	
 	public static void Berechnung(){					//hier wird alles relevante berechnet
@@ -54,7 +56,6 @@ public class SchieferWurf{
 		double g = Point.getG();
 		double a;
 		
-		
 		velocityZ = velocity*Math.sin(angle*(Math.PI/180));
 		velocityX = velocity*Math.cos(angle*(Math.PI/180));
 		timeOfFlight = ((velocity*Math.sin(angle*(Math.PI/180)))/g) + Math.sqrt(((velocity*Math.sin(angle*(Math.PI/180)))/g)*((velocity*Math.sin(angle*(Math.PI/180)))/g)+((2*height)/g));
@@ -64,12 +65,11 @@ public class SchieferWurf{
 		System.out.println("Flugzeit: " + timeOfFlight);
 		System.out.println("max. Hoehe: " + maxHeight);
 		System.out.println("Wurfweite: " + s);
+	
 		
-		Flightdata data = new Flightdata(velocityZ,velocityX,timeOfFlight,maxHeight,s);		//hier werden die berechneten Daten gespeichert
+		//int placeholder = (int)timeOfFlight*5;
 		
-		int placeholder = (int)timeOfFlight*5;
-		
-		double[][] saves = new double[(placeholder+1)][5];		//Praemisse: alle 0.2 s wird was gespeichert
+		//double[][] saves = new double[(placeholder+1)][5];		//Praemisse: alle 0.2 s wird was gespeichert
 		
 			for(int i = 1;i < saves.length;i++){
 				
@@ -98,8 +98,11 @@ public class SchieferWurf{
 				
 				
 				System.out.println( " " + z + " " + b + " " + c + " " + d + " " + e);
+				
+				Flightdata data = new Flightdata(timeOfFlight,maxHeight,s);		//hier werden die berechneten Daten gespeichert
+			
 			}
-	
+		
 	}
 	
 	
