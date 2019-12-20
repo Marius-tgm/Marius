@@ -108,18 +108,18 @@ public class SchieferWurf{
 		public static void vergleich(){		//hier wird das Array ausgewertet und mit der max. Hoehe und Wurfweite verglichen
 		
 		double a = 0;
-		double d = 0;
+		double b = 0;
 		
 		for(int d = 0; d < saves.length; d++){
 			
 			if(d == 0){
 				a = saves[d][2];	//hoehe (z-pos)
-				b = saves[d][1];	//x-pos
+				b = saves[d][1];	//x-pos (die dazu gehört)
 			}
-				else if(saves[d][2] > saves[d-1][2])
+				else if(saves[d][2] > saves[d-1][2]){
 						a = saves[d][2];
 						b = saves[d][1];
-			
+				}
 		}
 		
 		System.out.println("Berechnete maximale Hoehe: " + maxHeight);			//hier fehlt noch die x-pos
