@@ -8,7 +8,7 @@ public class Point{
 	
 	public Point(int _velocity, int _height, int _angle, int _x){
 		
-		if(_velocity < 401 && _velocity > 0){				//Abfrage - max. Geschwindigkeit darf 400 km/h sein, Punkt muss schneller als 0 km/h sein
+		if(_velocity < 112 && _velocity > 0){				//Abfrage - max. Geschwindigkeit darf 400 km/h sein, Punkt muss schneller als 0 km/h sein
 			velocity = _velocity;
 		}	
 		

@@ -19,8 +19,6 @@ public class Flightdata extends SchieferWurf{
 	public static void resultsIntoFile(){
 		
 		System.out.println("Das ist ein Test: " + saves[2][3]);
-		
-		
 			
 		try{
 			File dir = new File("Ergebnisordner");
@@ -50,19 +48,36 @@ public class Flightdata extends SchieferWurf{
 	}
 	
 	public static void writeFile(Writer w) throws IOException{
-			
-			
+		
+		int b = 0;
+		int t1 = 0;
+		int t2 = 0;
+		int t3 = 0;
+		int t4 = 0;
+		int t5 = 0;
+		
+		w.write("First line: Time \n");
+		w.write("Second line: x-position \n");
+		w.write("Third line: z-position \n");
+		w.write("fourth line: z-velocity \n");
+		w.write("fifth line: x-velocity \n");
+		w.write("\n");
+		
 			for(int v = 0; v < saves.length;v++){
 				
 				for(int j = 0; j < saves[v].length; j++){
+				
+						String p = Double.toString(saves[v][j]);
+						w.write(p + "\n");
 					
-					String p = Double.toString(saves[v][j]);
-					w.write(p + " ");
+					b++;
+					
+					if(b % 5 == 0){						//alle 5 Zeilen gibt es eine Leerzeile - zur Uebersichtlichkeit
+						w.write("\n");
+					}
 				}	
 			}
-
 			w.close();
-	
 	}
 		
 	

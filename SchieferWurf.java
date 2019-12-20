@@ -15,7 +15,7 @@ public class SchieferWurf{
 	static double velocityZ;			//Geschwindigkeit in z-Richtung
 	static double velocityX;			//Geschwindigkeit in x-Richtung
 	static double s;					//Wurfweite
-	static double[][] saves = new double[100][5];	//Array fuer die Ergebnisse
+	static double[][] saves = new double[1000][5];	//Array fuer die Ergebnisse
 	
 	
 	public static void main(String[] args){
@@ -67,22 +67,23 @@ public class SchieferWurf{
 		System.out.println("Wurfweite: " + s);
 	
 		
-		//int placeholder = (int)timeOfFlight*5;
+		int placeholder = (int)timeOfFlight*5;
 		
 		//double[][] saves = new double[(placeholder+1)][5];		//Praemisse: alle 0.2 s wird was gespeichert
 		
-			for(int i = 1;i < saves.length;i++){
+			for(int i = 1;i < placeholder;i++){
 				
 				if(i>0){
 					saves[i][0] = saves[i-1][0] + 0.2;
 					a = saves[i][0];
 					a = (double)Math.round(a*100)/100;
-					
+					saves[i][0] = a;
 				}
 					else{
 					saves[i][0] = saves[i][0] + 0.2;
 					a = saves[i][0];
-					a = (double)Math.round(a*100)/100;					
+					a = (double)Math.round(a*100)/100;	
+					saves[i][0] = a;					
 					}
 					
 				saves[i][1] = velocityX*a; 						//x-pos
