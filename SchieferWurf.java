@@ -16,7 +16,7 @@ public class SchieferWurf{
 	static double velocityX;			//Geschwindigkeit in x-Richtung
 	static double s;					//Wurfweite
 	static double[][] saves = new double[300][5];	//Array fuer die Ergebnisse
-	
+	static int placeholder;
 	
 	public static void main(String[] args){
 		
@@ -68,7 +68,9 @@ public class SchieferWurf{
 		System.out.println("Wurfweite: " + s);
 		
 		
-		int placeholder = (int)timeOfFlight*5;
+		placeholder = (int)timeOfFlight*5;
+		
+		Flightdata data1 = new Flightdata(placeholder);		//es wird die placeholder var an flightdata uebergeben
 		
 			for(int i = 1;i < placeholder;i++){					//alle 0.2 s Berechnung der Position
 				
@@ -99,7 +101,7 @@ public class SchieferWurf{
 				
 				System.out.println( " " + z + " " + b + " " + c + " " + d + " " + e);
 				
-				Flightdata data = new Flightdata(timeOfFlight,maxHeight,s);		//das hier ist gerade noch irgendwie unnütz, aber es wird sinnvoll, wenn es darum geht die verglichenen Daten rüber in FlightData zu schieben
+				Flightdata data2 = new Flightdata(timeOfFlight,maxHeight,s);		//das hier ist gerade noch irgendwie unnütz, aber es wird sinnvoll, wenn es darum geht die verglichenen Daten rüber in FlightData zu schieben
 			
 			}	
 		
@@ -119,16 +121,13 @@ public class SchieferWurf{
 				else if(saves[d][2] > saves[d-1][2]){
 						a = saves[d][2];
 						b = saves[d][1];
-				}
+					}
 		}
 		
 		System.out.println("Berechnete maximale Hoehe: " + maxHeight);			//hier fehlt noch die x-pos
 		System.out.println("In der Grafik dargestellte maximale Hoehe und x-pos: " + a + " " + b);
 		System.out.println("Differenz: " + (maxHeight-a));
-		
-		
-		
-		
+			
 	}
 	
 	

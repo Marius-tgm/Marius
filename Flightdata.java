@@ -5,6 +5,7 @@ public class Flightdata extends SchieferWurf{
 	double timeOfFlight;
 	double maxHeight;
 	double s;
+	static int placeholder;
 	
 	
 	public Flightdata(double _timeOfFlight,double _maxHeight,double _s){
@@ -15,6 +16,11 @@ public class Flightdata extends SchieferWurf{
 		
 	}
 	
+	public Flightdata(int _placeholder){
+		
+		placeholder = _placeholder;
+		
+	}
 	
 	public static void resultsIntoFile(){
 			
@@ -61,7 +67,7 @@ public class Flightdata extends SchieferWurf{
 		w.write("fifth line: x-velocity \n");
 		w.write("\n");
 		
-			for(int v = 0; v < saves.length;v++){
+			for(int v = 0; v < placeholder;v++){
 				
 				for(int j = 0; j < saves[v].length; j++){
 				
