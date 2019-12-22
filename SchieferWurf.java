@@ -20,7 +20,7 @@ public class SchieferWurf{
 	static double maxVelocityZ = 0.0;
 	static double maxVelocity = 0.0;
 	
-	public static void main(String[] args){
+	public static void main(String[] args) throws Exception {
 		
 		
 		Scanner velocityInput = new Scanner(System.in);
@@ -47,6 +47,7 @@ public class SchieferWurf{
 		berechnung();
 		Flightdata.resultsIntoFile();
 		vergleich();
+		optOutput Graphic = new optOutput(saves, maxHeight, timeOfFlight); 
 	}
 	
 	public static void berechnung(){					//hier wird alles relevante berechnet
@@ -112,7 +113,7 @@ public class SchieferWurf{
 		
 	}
 	
-		public static void vergleich(){		//hier wird das Array ausgewertet und mit der max. Hoehe und Wurfweite verglichen
+		public static void vergleich(){		//hier wird das Array ausge_savest und mit der max. Hoehe und Wurfweite verglichen
 		
 		double arrayMaxHeight = 0.0;
 		double arrayMaxHeightXpos = 0.0;
