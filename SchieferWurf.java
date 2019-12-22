@@ -17,6 +17,8 @@ public class SchieferWurf{
 	static double s;					//Wurfweite
 	static double[][] saves = new double[300][5];	//Array fuer die Ergebnisse
 	static int placeholder;
+	static double maxVelocityZ = 0.0;
+	static double maxVelocity = 0.0;
 	
 	public static void main(String[] args){
 		
@@ -62,17 +64,20 @@ public class SchieferWurf{
 		timeOfFlight = ((velocity*Math.sin(angle*(Math.PI/180)))/g) + Math.sqrt(((velocity*Math.sin(angle*(Math.PI/180)))/g)*((velocity*Math.sin(angle*(Math.PI/180)))/g)+((2*height)/g));
 		maxHeight = height+0.5*(((velocity*Math.sin(angle*(Math.PI/180)))*(velocity*Math.sin(angle*(Math.PI/180))))/g);
 		s = velocityX * timeOfFlight;
-	
+		maxVelocityZ = (velocityZ-(g*timeOfFlight));
+		maxVelocity = Math.sqrt((maxVelocityZ*maxVelocityZ)+(velocityX*velocityX));
+		
+		
 		System.out.println("Flugzeit: " + timeOfFlight);
 		System.out.println("max. Hoehe: " + maxHeight);
 		System.out.println("Wurfweite: " + s);
 		
 		
-		placeholder = (int)timeOfFlight*5;
+		placeholder = (int)(timeOfFlight*5);
 		
 		Flightdata data1 = new Flightdata(placeholder);		//es wird die placeholder var an flightdata uebergeben
 		
-			for(int i = 1;i < placeholder;i++){					//alle 0.2 s Berechnung der Position
+			for(int i = 1;i < placeholder+1;i++){					//alle 0.2 s Berechnung der Position
 				
 				if(i>0){
 					saves[i][0] = saves[i-1][0] + 0.2;
@@ -109,25 +114,46 @@ public class SchieferWurf{
 	
 		public static void vergleich(){		//hier wird das Array ausgewertet und mit der max. Hoehe und Wurfweite verglichen
 		
-		double a = 0;
-		double b = 0;
+		double arrayMaxHeight = 0.0;
+		double arrayMaxHeightXpos = 0.0;
+		double arrayMaxVelocity = 0.0;
+		double arrayMaxVelocityXpos = 0.0;
+		double arrayMaxVelocityZpos = 0.0;
+		double arrayMaxVelocityTest = 0.0;
 		
-		for(int d = 0; d < saves.length; d++){
+		for(int d = 0; d < placeholder; d++){
 			
 			if(d == 0){
-				a = saves[d][2];	//hoehe (z-pos)
-				b = saves[d][1];	//x-pos (die dazu gehört)
+				arrayMaxHeight = saves[d][2];	//hoehe (z-pos)
+				arrayMaxHeightXpos = saves[d][1];	//x-pos (die dazu gehört)
+				arrayMaxVelocity = saves[d][3];		//geschw. in z-Richtung
+				arrayMaxVelocityZpos = saves[d][1];	//z-pos
 			}
-				else if(saves[d][2] > saves[d-1][2]){
-						a = saves[d][2];
-						b = saves[d][1];
+				else{
+					if(saves[d][2] > saves[d-1][2]){
+						arrayMaxHeight = saves[d][2];
+						arrayMaxHeightXpos = saves[d][1];
 					}
+					if((saves[d][3]*saves[d][3]) > (saves[d-1][3]*saves[d-1][3])){
+						arrayMaxVelocity = saves[d][3];			//geschw. z-Richtung
+						arrayMaxVelocityXpos = saves[d][1];		//dazugeh. x-pos
+						arrayMaxVelocityZpos = saves[d][2];		//dazugeh. z-pos
+					}
+				}
 		}
 		
+		arrayMaxVelocityTest = Math.sqrt((arrayMaxVelocity*arrayMaxVelocity)+(velocityX*velocityX));	//Betrag der maximalen Gesamtgeschwindigkeit ||ACHTUNG: HIER MUSS DIE FORMEL OPTIMIERT WERDEN, DIE IST FALSCH
+		
+		
 		System.out.println("Berechnete maximale Hoehe: " + maxHeight);			//hier fehlt noch die x-pos
-		System.out.println("In der Grafik dargestellte maximale Hoehe und x-pos: " + a + " " + b);
-		System.out.println("Differenz: " + (maxHeight-a));
-			
+		System.out.println("In der Grafik dargestellte maximale Hoehe und x-pos: " + arrayMaxHeight + " " + arrayMaxHeightXpos);
+		System.out.println("Differenz: " + (maxHeight-arrayMaxHeight));
+		System.out.println("Maximale Geschwindigkeit (berechnet): " + maxVelocity);
+		System.out.println("Bei den Koordinaten (x,z): (" + s + "," + 0 + ")");
+		System.out.println("Maximale Geschwindigkeit im Array: " + arrayMaxVelocityTest);
+		System.out.println("Bei den Koordinaten (x,z): (" + arrayMaxVelocityXpos + "," + arrayMaxVelocityZpos + ")");	
+		System.out.println("Differenz der maximalen Geschwindigkeiten: " + (maxVelocity-arrayMaxVelocityTest));
+	
 	}
 	
 	
