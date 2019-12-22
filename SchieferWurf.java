@@ -30,15 +30,15 @@ public class SchieferWurf{
 		
 		System.out.println("Mit diesem Programm kann kannst du einen Schiefen Wurf berechnen und Dir die Flugbahn anzeigen lassen.");
 		System.out.println("Bitte gib nun die Startparameter ein: ");
-		System.out.print("Geschwindigkeit: ");				//Eingabe der Startparameter
+		System.out.print("Geschwindigkeit (m/s): ");				//Eingabe der Startparameter
 		
 		int velocityTest = velocityInput.nextInt();
 		
-		System.out.print("\nAbwurfhoehe: ");
+		System.out.print("\nAbwurfhoehe (m): ");
 		
 		int heightTest = startHeightInput.nextInt();
 		
-		System.out.print("\nAbwurfwinkel: ");
+		System.out.print("\nAbwurfwinkel (Grad): ");
 		
 		int angleTest = angleInput.nextInt();
 		
@@ -145,7 +145,7 @@ public class SchieferWurf{
 		arrayMaxVelocityTest = Math.sqrt((arrayMaxVelocity*arrayMaxVelocity)+(velocityX*velocityX));	//Betrag der maximalen Gesamtgeschwindigkeit ||ACHTUNG: HIER MUSS DIE FORMEL OPTIMIERT WERDEN, DIE IST FALSCH
 		
 		
-		System.out.println("Berechnete maximale Hoehe: " + maxHeight);			//hier fehlt noch die x-pos
+		System.out.println("\nBerechnete maximale Hoehe: " + maxHeight);			//hier fehlt noch die x-pos
 		System.out.println("In der Grafik dargestellte maximale Hoehe und x-pos: " + arrayMaxHeight + " " + arrayMaxHeightXpos);
 		System.out.println("Differenz: " + (maxHeight-arrayMaxHeight));
 		System.out.println("Maximale Geschwindigkeit (berechnet): " + maxVelocity);
