@@ -47,7 +47,7 @@ public class SchieferWurf{
 		berechnung();
 		Flightdata.resultsIntoFile();
 		vergleich();
-		optOutput Graphic = new optOutput(saves, maxHeight, timeOfFlight); 
+		optOutput Graphic = new optOutput(saves, maxHeight, timeOfFlight, placeholder); 
 	}
 	
 	public static void berechnung(){					//hier wird alles relevante berechnet
@@ -143,10 +143,9 @@ public class SchieferWurf{
 				}
 		}
 		
-		arrayMaxVelocityTest = Math.sqrt((arrayMaxVelocity*arrayMaxVelocity)+(velocityX*velocityX));	//Betrag der maximalen Gesamtgeschwindigkeit ||ACHTUNG: HIER MUSS DIE FORMEL OPTIMIERT WERDEN, DIE IST FALSCH
+		arrayMaxVelocityTest = Math.sqrt((arrayMaxVelocity*arrayMaxVelocity)+(velocityX*velocityX));	//Betrag der maximalen Gesamtgeschwindigkeit 		
 		
-		
-		System.out.println("\nBerechnete maximale Hoehe: " + maxHeight);			//hier fehlt noch die x-pos
+		System.out.println("\nBerechnete maximale Hoehe: " + maxHeight);			
 		System.out.println("In der Grafik dargestellte maximale Hoehe und x-pos: " + arrayMaxHeight + " " + arrayMaxHeightXpos);
 		System.out.println("Differenz: " + (maxHeight-arrayMaxHeight));
 		System.out.println("Maximale Geschwindigkeit (berechnet): " + maxVelocity);
