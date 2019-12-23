@@ -7,11 +7,13 @@ public class optOutput{
     String[][] Askii = new String[28][108];  /*initiating the Array for Askii- visualization*/
     int Laenge = 10000;
     int Hoehe = 10000;
+	
     double maxHeight;
     double timeOfFlight;     
 	int placeholder;
+	double s;
 	
-    public optOutput(double _saves[][], double _maxHeight, double _timeOfFlight, int _placeholder) throws Exception{
+    public optOutput(double _saves[][], double _maxHeight, double _timeOfFlight, int _placeholder, double _s) throws Exception{
 		
         String Ausgabe;
         double yposition;
@@ -21,12 +23,13 @@ public class optOutput{
         timeOfFlight = _timeOfFlight;
         maxHeight = _maxHeight;
 		placeholder = _placeholder;
+		s = _s;
         
-        if(timeOfFlight<=1000)      //categorizing the magnitude of the throw
+        if(s<=1000)      //categorizing the magnitude of the throw
 			Laenge = 1000;
-        if(timeOfFlight<=100)
+        if(s<=100)
 			Laenge = 100;
-        if(timeOfFlight<=10)
+        if(s<=10)
 			Laenge = 10;
         
         if(maxHeight<=1000)
@@ -38,10 +41,7 @@ public class optOutput{
 
         JFrame window = new JFrame(); 							
         Font mono = new Font("Monospaced",Font.PLAIN,14);			//monospaced Schriftart
-      
-           
-        
-  
+ 
         
                                             //general build up of the graph: the string [0][0] is in the upper left corner
 
@@ -66,7 +66,7 @@ public class optOutput{
         Askii[22][0] = "     ";
         Askii[2][1] = "";
         Askii[22][105] = ">";
-        Askii[22][107] = " Zeit in s";
+        Askii[22][107] = " Wurfweite in m";
 		
         for(int i=3; i<105; i++){
         
@@ -109,7 +109,7 @@ public class optOutput{
             Askii[23][i] = "";
         }  
 		
-        switch(Laenge){								//x-achsenbeschriftung (aktuell noch mit Zeit, wird noch in laenge geaendert
+        switch(Laenge){								//x-achsenbeschriftung
             case 10000:
             Askii[23][5] = "  0        1000      2000      3000      4000      5000      6000      7000      8000      9000      10000";
             break;
@@ -130,20 +130,20 @@ public class optOutput{
 		
         for(int i=0; i<placeholder+1; i++){					//hier musste saves.length placeholder weichen, da die laenge des arrays fest auf 300 gesetzt ist und placeholder angibt, wie viele Zeiteinheiten wir haben
         
-            fill = timeselect(_saves[i][0], Laenge);    //evaluates timebased, wether a data will be drawn (obere Grenze wird geprüft)
+            fill = timeselect(_saves[i][1], Laenge);    //evaluates wether a data will be drawn
             
 			if (fill=true){
             
                 yposition = round(_saves[i][2], Hoehe);
                 
                 if(yposition==0){
-                    paint(xpos(_saves[i][0],Laenge), 0);
+                    paint(xpos(_saves[i][1],Laenge), 0);
                 }
                 else if(yposition==Hoehe){
-                    paint(xpos(_saves[i][0],Laenge), 21);
+                    paint(xpos(_saves[i][1],Laenge), 21);
                 }
                 else{
-                    paint(xpos(_saves[i][0],Laenge), (int)(yposition*2)); 
+                    paint(xpos(_saves[i][1],Laenge), (int)(yposition*2)); 
                 }
             
                 for(int o =0; o < 28; o++){                  
@@ -211,7 +211,7 @@ public class optOutput{
 
         while(i!=100){
         
-            if(a+0.01*Laenge*i == Laenge)
+            if(a+(0.01*Laenge*i) == Laenge)
             {
                 b = true;
                 break;
@@ -230,10 +230,15 @@ public class optOutput{
 			return (int)number;
         
         switch(_Hoehe){
-            case 100: number = number/10;					//fehlen hier nicht breaks?
-            case 1000: number = number/100;
-            case 10000: number = number/1000;
-            default: 
+            case 100: 
+			number = number/10;					//fehlen hier nicht breaks?
+            break;
+			case 1000:
+			number = number/100;
+			break;
+            case 10000:
+			number = number/1000;
+            break; 
         }
         
 
@@ -269,12 +274,17 @@ public class optOutput{
 
     public static int xpos(double time, int _Laenge){
         
-        switch(_Laenge){						//feheln hier nicht auch breaks?
-            case 100: return (int)(time);
-            case 10: return (int)(time*10);
-            case 1000: return (int)((time/10));
-            case 10000: return (int)((time/100));
-            default: return 1;
+        switch(_Laenge){						
+            case 100:
+			return (int)(time);
+            case 10:
+			return (int)(time*10);
+            case 1000:
+			return (int)((time/10));
+            case 10000:
+			return (int)((time/100));
+            default: 
+			return 1;
         }
     }
 

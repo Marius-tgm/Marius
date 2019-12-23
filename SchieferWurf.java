@@ -47,7 +47,7 @@ public class SchieferWurf{
 		berechnung();
 		Flightdata.resultsIntoFile();
 		vergleich();
-		optOutput Graphic = new optOutput(saves, maxHeight, timeOfFlight, placeholder); 
+		optOutput Graphic = new optOutput(saves, maxHeight, timeOfFlight, placeholder, s); 
 	}
 	
 	public static void berechnung(){					//hier wird alles relevante berechnet
