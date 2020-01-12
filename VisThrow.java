@@ -36,8 +36,6 @@ public class VisThrow{
         x_Max = define_xscale(s);
         
 
-        
-
             for(int i=0; i<24; i++){              //filling the array with space
                 
                 for(int u=0; u<105; u++){   
@@ -84,13 +82,19 @@ public class VisThrow{
                 spot(saves[i][1],saves[i][2]);
               
         }
+		
+		String[] forFileOutput = new String[24];
         
         for(int i=0; i<24; i++){                    //fill the Aski-Data into a txt.file
             
             visual = ArraysRead(Aski[i], 105);
             System.out.println(visual);
+			forFileOutput[i] = visual;
 
         }
+		
+		Flightdata data2 = new Flightdata(forFileOutput);
+		
     }
 
     //define_yscale defines, which scale fits best to the maximum of Height, it uses a double and returns an int
@@ -136,6 +140,7 @@ public class VisThrow{
     }
     
     //draw_y is drawing the y-scale and makes sure, that the axis stays straight
+	
     double calcnumber;
     private void draw_y(int y_Maximum){
         calcnumber = y_Maximum;
@@ -198,9 +203,7 @@ public class VisThrow{
         Aski[23][3] = visual;
     }
 
-   
-
-    
+ 
     //this method finds the best fitting array spot 
     double comp1;
     double comp2;

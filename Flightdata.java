@@ -6,6 +6,7 @@ public class Flightdata extends SchieferWurf{
 	double maxHeight;
 	double s;
 	static int placeholder;
+	static String[] forFileOutput = new String[24];
 	
 	
 	public Flightdata(double _timeOfFlight,double _maxHeight,double _s){
@@ -13,6 +14,12 @@ public class Flightdata extends SchieferWurf{
 		timeOfFlight = _timeOfFlight;
 		maxHeight = _maxHeight;
 		s = _s;
+		
+	}
+	
+	public Flightdata(String _forFileOutput[]){
+		
+		forFileOutput = _forFileOutput;
 		
 	}
 	
@@ -83,6 +90,52 @@ public class Flightdata extends SchieferWurf{
 			}
 			w.close();
 	}
+	
+	
+	public static void askiIntoFile() throws IOException{
+		
+		try{
+			
+			File dir = new File("Askii-Pictures");
+			
+			dir.mkdir();
+			String[] dateien = dir.list();
+			
+			int k = 1;
+			
+			if(dateien.length > 0)
+				k = (k*dateien.length)+1;
+			
+			File dateiOut = new File("Askii-Pictures" + "/" + "AskiiPic_" + k + ".txt");
+			
+			dateiOut.createNewFile();
+			
+			Writer out = new FileWriter(dateiOut);
+			
+			writeAskiFile(out);	
+		} catch(IOException e){
+			System.out.println(e);
+		} catch(ArrayIndexOutOfBoundsException ae){
+			System.out.println(ae);
+		}
+		
+	}
+	
+	public static void writeAskiFile(Writer w) throws IOException{
+		
+		
+		for(int i = 0;i < forFileOutput.length; i++){
+			
+			w.write(forFileOutput[i] + "\n");
+			
+		}
+		
+		w.close();
+		
+		
+		
+	}
+	
 		
 	
 } 

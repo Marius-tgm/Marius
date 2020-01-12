@@ -27,7 +27,7 @@ public class SchieferWurf{
 		Scanner startHeightInput = new Scanner(System.in);
 		Scanner angleInput = new Scanner(System.in);
 		
-		
+		System.out.println("With this program you can simulate a throw.");
 		System.out.println("Mit diesem Programm kann kannst du einen Schiefen Wurf berechnen und Dir die Flugbahn anzeigen lassen.");
 		System.out.println("Bitte gib nun die Startparameter ein: ");
 		System.out.print("Geschwindigkeit (m/s): ");				//Eingabe der Startparameter
@@ -47,7 +47,8 @@ public class SchieferWurf{
 		berechnung();
 		Flightdata.resultsIntoFile();
 		vergleich();
-		optOutput Graphic = new optOutput(saves, maxHeight, timeOfFlight, placeholder, s); 
+		VisThrow Graphic = new VisThrow(saves, maxHeight, placeholder, s);
+		Flightdata.askiIntoFile();
 	}
 	
 	public static void berechnung(){					//hier wird alles relevante berechnet
