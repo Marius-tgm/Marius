@@ -27,14 +27,13 @@ public class SchieferWurf{
 		Scanner startHeightInput = new Scanner(System.in);
 		Scanner angleInput = new Scanner(System.in);
 		
-		System.out.println("With this program you can simulate a throw.");
-		System.out.println("Mit diesem Programm kann kannst du einen Schiefen Wurf berechnen und Dir die Flugbahn anzeigen lassen.");
-		System.out.println("Bitte gib nun die Startparameter ein: ");
-		System.out.print("Geschwindigkeit (m/s): ");				//Eingabe der Startparameter
+		System.out.println("With this program you can simulate a throw. It will be shown as an Askii Image, after you entered the Parameters.");
+		System.out.println("Please enter a velocity between 0 an 111 m/s, a discharge height between 0 and 10000 m and a discharge angle between 90 and -90 degree:");
+		System.out.print("Velocity (m/s): ");				//Eingabe der Startparameter
 		
 		int velocityTest = velocityInput.nextInt();
 		
-		System.out.print("\nAbwurfhoehe (m): ");
+		System.out.print("\nDischarge heigth (m): ");
 		
 		int heightTest = startHeightInput.nextInt();
 		
