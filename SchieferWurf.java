@@ -1,7 +1,7 @@
 //Schiefer Wurf v.1.0
 //Gruppe 3 Informatik 1
 //Patrick Scheumer, Lennart Uphaus, Marius Benkert
-//c 2019
+//c 2019-2020
 
 import java.math.RoundingMode;
 import java.math.BigDecimal;
@@ -10,12 +10,12 @@ import java.util.Scanner;
 public class SchieferWurf{
 	
 	
-	static double maxHeight;			//maximale Hoehe
-	static double timeOfFlight;			//t des gesamten Fluges
-	static double velocityZ;			//Geschwindigkeit in z-Richtung
-	static double velocityX;			//Geschwindigkeit in x-Richtung
-	static double s;					//Wurfweite
-	static double[][] saves = new double[300][5];	//Array fuer die Ergebnisse
+	static double maxHeight;			//max height
+	static double timeOfFlight;			//timespan of the whole flight
+	static double velocityZ;			//velocity in z-direction
+	static double velocityX;			//velocity in x-direction
+	static double s;					//length of the throw
+	static double[][] saves = new double[300][5];	//Array for the results
 	static int placeholder;
 	static double maxVelocityZ = 0.0;
 	static double maxVelocity = 0.0;
@@ -27,30 +27,30 @@ public class SchieferWurf{
 		Scanner startHeightInput = new Scanner(System.in);
 		Scanner angleInput = new Scanner(System.in);
 		
-		System.out.println("With this program you can simulate a throw. It will be shown as an Askii Image, after you entered the Parameters.");
+		System.out.println("This program simulates a throw. It will be shown as an askii image after you entered the Parameters. \nThe results and the askii image will be saved in seperate files.");
 		System.out.println("Please enter a velocity between 0 an 111 m/s, a discharge height between 0 and 10000 m and a discharge angle between 90 and -90 degree:");
-		System.out.print("Velocity (m/s): ");				//Eingabe der Startparameter
+		System.out.print("Velocity (m/s): ");				//User enters the paramters of the throw
 		
 		int velocityTest = velocityInput.nextInt();
 		
-		System.out.print("\nDischarge heigth (m): ");
+		System.out.print("\nDischarge height (m): ");
 		
 		int heightTest = startHeightInput.nextInt();
 		
-		System.out.print("\nAbwurfwinkel (Grad): ");
+		System.out.print("\nDischarge angle (degree): ");
 		
 		int angleTest = angleInput.nextInt();
 		
-		Point p1 = new Point(velocityTest,heightTest,angleTest,0); //Uebergabe der Paramter an die Punkt-Klasse, wo diese dann geprüft werden, die 0 ist die x-Pos
+		Point p1 = new Point(velocityTest,heightTest,angleTest,0); //passing entered paramters to the point class, were they will be checked
 		
-		berechnung();
+		calculation();
 		Flightdata.resultsIntoFile();
-		vergleich();
+		comparison();
 		VisThrow Graphic = new VisThrow(saves, maxHeight, placeholder, s);
 		Flightdata.askiIntoFile();
 	}
 	
-	public static void berechnung(){					//hier wird alles relevante berechnet
+	public static void calculation(){					//calculates the maxHeight, velocity (x-v,z-v and general velocity), the time of flight, the length of the throw
 	
 		
 		int velocity = Point.getVelocity();
@@ -67,18 +67,12 @@ public class SchieferWurf{
 		s = velocityX * timeOfFlight;
 		maxVelocityZ = (velocityZ-(g*timeOfFlight));
 		maxVelocity = Math.sqrt((maxVelocityZ*maxVelocityZ)+(velocityX*velocityX));
-		
-		
-		System.out.println("Flugzeit: " + timeOfFlight);
-		System.out.println("max. Hoehe: " + maxHeight);
-		System.out.println("Wurfweite: " + s);
-		
-		
+
 		placeholder = (int)(timeOfFlight*5);
 		
-		Flightdata data1 = new Flightdata(placeholder);		//es wird die placeholder var an flightdata uebergeben
+		Flightdata data1 = new Flightdata(placeholder);		//passing var placeholdeer to the class Flightdata
 		
-			for(int i = 1;i < placeholder+1;i++){					//alle 0.2 s Berechnung der Position
+			for(int i = 1;i < placeholder+1;i++){					//calculates every 0.2 sec. parameters of the flight
 				
 				if(i>0){
 					saves[i][0] = saves[i-1][0] + 0.2;
@@ -95,25 +89,17 @@ public class SchieferWurf{
 					
 				saves[i][1] = velocityX*a; 						//x-pos
 				saves[i][2]	= height + (velocityZ*a)-(0.5*g*a*a); //z-pos
-				saves[i][3]	= velocityZ-(g*a);					//Geschwindigkeit z-Richtung
-				saves[i][4]	= velocityX;						//Geschwindigkeit in x-Richtung -> konstant
+				saves[i][3]	= velocityZ-(g*a);					//velocity z-direction
+				saves[i][4]	= velocityX;						//velocity x-direction -> const.
 
-				double z = a;
-				double b = saves[i][1];
-				double c = saves[i][2];
-				double d = saves[i][3];
-				double e = saves[i][4];
-				
-				
-				System.out.println( " " + z + " " + b + " " + c + " " + d + " " + e);
-				
-				Flightdata data2 = new Flightdata(timeOfFlight,maxHeight,s);		//das hier ist gerade noch irgendwie unnütz, aber es wird sinnvoll, wenn es darum geht die verglichenen Daten rüber in FlightData zu schieben
+
+				Flightdata data2 = new Flightdata(timeOfFlight,maxHeight,s);
 			
 			}	
 		
 	}
 	
-		public static void vergleich(){		//hier wird das Array ausge_savest und mit der max. Hoehe und Wurfweite verglichen
+		public static void comparison(){		//compares the exact calculated paramters with paramters in the saves array (contains the paramters of the flight every 0.2 seconds)
 		
 		double arrayMaxHeight = 0.0;
 		double arrayMaxHeightXpos = 0.0;
@@ -125,10 +111,10 @@ public class SchieferWurf{
 		for(int d = 0; d < placeholder; d++){
 			
 			if(d == 0){
-				arrayMaxHeight = saves[d][2];	//hoehe (z-pos)
-				arrayMaxHeightXpos = saves[d][1];	//x-pos (die dazu gehört)
-				arrayMaxVelocity = saves[d][3];		//geschw. in z-Richtung
-				arrayMaxVelocityZpos = saves[d][1];	//z-pos
+				arrayMaxHeight = saves[d][2];	//height (z-position)
+				arrayMaxHeightXpos = saves[d][1];	//x-pos (that belongs to that z-pos )
+				arrayMaxVelocity = saves[d][3];		//velocity z-direction
+				arrayMaxVelocityZpos = saves[d][1];	//z-position
 			}
 				else{
 					if(saves[d][2] > saves[d-1][2]){
@@ -136,23 +122,23 @@ public class SchieferWurf{
 						arrayMaxHeightXpos = saves[d][1];
 					}
 					if((saves[d][3]*saves[d][3]) > (saves[d-1][3]*saves[d-1][3])){
-						arrayMaxVelocity = saves[d][3];			//geschw. z-Richtung
-						arrayMaxVelocityXpos = saves[d][1];		//dazugeh. x-pos
-						arrayMaxVelocityZpos = saves[d][2];		//dazugeh. z-pos
+						arrayMaxVelocity = saves[d][3];			//velocity. z-Richtung
+						arrayMaxVelocityXpos = saves[d][1];		//x-pos that belongs to the z-velocity
+						arrayMaxVelocityZpos = saves[d][2];		//z-pos that belongs to the z-velocity
 					}
 				}
 		}
 		
-		arrayMaxVelocityTest = Math.sqrt((arrayMaxVelocity*arrayMaxVelocity)+(velocityX*velocityX));	//Betrag der maximalen Gesamtgeschwindigkeit 		
+		arrayMaxVelocityTest = Math.sqrt((arrayMaxVelocity*arrayMaxVelocity)+(velocityX*velocityX));	//absolute value of the velocity		
 		
-		System.out.println("\nBerechnete maximale Hoehe: " + maxHeight);			
-		System.out.println("In der Grafik dargestellte maximale Hoehe und x-pos: " + arrayMaxHeight + " " + arrayMaxHeightXpos);
-		System.out.println("Differenz: " + (maxHeight-arrayMaxHeight));
-		System.out.println("Maximale Geschwindigkeit (berechnet): " + maxVelocity);
-		System.out.println("Bei den Koordinaten (x,z): (" + s + "," + 0 + ")");
-		System.out.println("Maximale Geschwindigkeit im Array: " + arrayMaxVelocityTest);
-		System.out.println("Bei den Koordinaten (x,z): (" + arrayMaxVelocityXpos + "," + arrayMaxVelocityZpos + ")");	
-		System.out.println("Differenz der maximalen Geschwindigkeiten: " + (maxVelocity-arrayMaxVelocityTest));
+		System.out.format("\nExact maximal heigth: %.2f m\n",maxHeight);			
+		System.out.format("Maximal height and x-positon in the saved file: %.2f m| %.2f m\n",arrayMaxHeight,arrayMaxHeightXpos);
+		System.out.format("Difference: %.2f m\n",(maxHeight-arrayMaxHeight));
+		System.out.format("Exact velocity: %.2f m/s\n",maxVelocity);
+		System.out.format("Coordinates (x;z): (%.2f;0)\n",s);
+		System.out.format("Maximal velocity in the saved file: %.2f m/s \n",arrayMaxVelocityTest);
+		System.out.format("Coordinates (x;z): (%.2f;%.2f)\n",arrayMaxVelocityXpos,arrayMaxVelocityZpos);	
+		System.out.format("Difference: %.2f m/s\n\n",(maxVelocity-arrayMaxVelocityTest));
 	
 	}
 	
