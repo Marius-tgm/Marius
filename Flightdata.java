@@ -35,12 +35,12 @@ public class Flightdata extends SchieferWurf{
 			File dir = new File("Results");
 			
 			dir.mkdir();
-			String[] dateien = dir.list();		//Verzeichniseintraege aufzaehlen
+			String[] dateien = dir.list();		//list of files in the directory
 			
 			int k = 1;
 			
 			if(dateien.length > 0)
-				k = (k*dateien.length)+1;				//Anzahl der Eintraege wird gezahelt und um 1 erhoeht
+				k = (k*dateien.length)+1;				//number of Files in the directory +1
 			
 			File dateiOut = new File("Results" + "/" + "result" + k + "_v-" +  Point.getVelocity() + "_h-"+ Point.getHeight() + "_a-" + Point.getAngle() + ".csv");	//Benennung anhand der Anzahl der vorhandenen Dateien
 		
@@ -83,7 +83,7 @@ public class Flightdata extends SchieferWurf{
 					
 					b++;
 					
-					if(b % 5 == 0){						//alle 5 Zeilen gibt es eine Leerzeile - zur Uebersichtlichkeit
+					if(b % 5 == 0){						//space - after five values
 						w.write("\n");
 					}
 				}	
