@@ -122,7 +122,7 @@ public class SchieferWurf{
 						arrayMaxHeightXpos = saves[d][1];
 					}
 					if((saves[d][3]*saves[d][3]) > (saves[d-1][3]*saves[d-1][3])){
-						arrayMaxVelocity = saves[d][3];			//velocity. z-Richtung
+						arrayMaxVelocity = saves[d][3];			//velocity. z-direction
 						arrayMaxVelocityXpos = saves[d][1];		//x-pos that belongs to the z-velocity
 						arrayMaxVelocityZpos = saves[d][2];		//z-pos that belongs to the z-velocity
 					}
@@ -131,13 +131,13 @@ public class SchieferWurf{
 		
 		arrayMaxVelocityTest = Math.sqrt((arrayMaxVelocity*arrayMaxVelocity)+(velocityX*velocityX));	//absolute value of the velocity		
 		
-		System.out.format("\nExact maximal heigth: %.2f m\n",maxHeight);			
-		System.out.format("Maximal height and x-positon in the saved file: %.2f m| %.2f m\n",arrayMaxHeight,arrayMaxHeightXpos);
+		System.out.format("\nExact maximal height: %.2f m\n",maxHeight);			
+		System.out.format("Maximal height and x-positon in the saved file: %.2f m | %.2f m\n",arrayMaxHeight,arrayMaxHeightXpos);
 		System.out.format("Difference: %.2f m\n",(maxHeight-arrayMaxHeight));
 		System.out.format("Exact velocity: %.2f m/s\n",maxVelocity);
-		System.out.format("Coordinates (x;z): (%.2f;0)\n",s);
+		System.out.format("Coordinates (x;z): (%.2f m;0 m)\n",s);
 		System.out.format("Maximal velocity in the saved file: %.2f m/s \n",arrayMaxVelocityTest);
-		System.out.format("Coordinates (x;z): (%.2f;%.2f)\n",arrayMaxVelocityXpos,arrayMaxVelocityZpos);	
+		System.out.format("Coordinates (x;z): (%.2f m;%.2f m)\n",arrayMaxVelocityXpos,arrayMaxVelocityZpos);	
 		System.out.format("Difference: %.2f m/s\n\n",(maxVelocity-arrayMaxVelocityTest));
 	
 	}

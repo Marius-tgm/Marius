@@ -61,17 +61,17 @@ public class Flightdata extends SchieferWurf{
 	public static void writeFile(Writer w) throws IOException{
 		
 		int b = 0;
-		int t1 = 0;
-		int t2 = 0;
-		int t3 = 0;
-		int t4 = 0;
-		int t5 = 0;
 		
-		w.write("First line: Time \n");
-		w.write("Second line: x-position \n");
-		w.write("Third line: z-position \n");
-		w.write("fourth line: z-velocity \n");
-		w.write("fifth line: x-velocity \n");
+		w.write("Startparameters:\n");
+		w.write("velocity: " + Point.getVelocity() + " m/s");
+		w.write("\nDischarge height: " + Point.getHeight() + " m");
+		w.write("\nDischarge angle: " + Point.getAngle() + " degree");
+		w.write("\n\n");
+		w.write("Time,");
+		w.write("x-position,");
+		w.write("z-position,");
+		w.write("z-velocity,");
+		w.write("x-velocity\n");
 		w.write("\n");
 		
 			for(int v = 0; v < placeholder;v++){
@@ -79,7 +79,7 @@ public class Flightdata extends SchieferWurf{
 				for(int j = 0; j < saves[v].length; j++){
 				
 						String p = Double.toString(saves[v][j]);
-						w.write(p + "\n");
+						w.write(p + ",");
 					
 					b++;
 					

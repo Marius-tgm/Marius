@@ -50,9 +50,9 @@ public class VisThrow{
                 
             }
             Aski[1][3] = "^";
-            Aski[0][1] = "Flughoehe in m";
+            Aski[0][1] = "Height in m";
             Aski[22][103] = ">";
-            Aski[22][104] = " Wurfweite in m";
+            Aski[22][104] = " thrown distance in m";
             for(int i=2; i<103; i++){
             
                 Aski[22][i] = "-";
