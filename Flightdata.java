@@ -32,7 +32,7 @@ public class Flightdata extends SchieferWurf{
 	public static void resultsIntoFile(){
 			
 		try{
-			File dir = new File("Ergebnisordner");
+			File dir = new File("Results");
 			
 			dir.mkdir();
 			String[] dateien = dir.list();		//Verzeichniseintraege aufzaehlen
@@ -42,7 +42,7 @@ public class Flightdata extends SchieferWurf{
 			if(dateien.length > 0)
 				k = (k*dateien.length)+1;				//Anzahl der Eintraege wird gezahelt und um 1 erhoeht
 			
-			File dateiOut = new File("Ergebnisordner" + "/" + "Ergebnisse_" + k + ".csv");	//Benennung anhand der Anzahl der vorhandenen Dateien
+			File dateiOut = new File("Results" + "/" + "result" + k + "_v-" +  Point.getVelocity() + "_h-"+ Point.getHeight() + "_a-" + Point.getAngle() + ".csv");	//Benennung anhand der Anzahl der vorhandenen Dateien
 		
 			dateiOut.createNewFile();
 			
@@ -65,7 +65,7 @@ public class Flightdata extends SchieferWurf{
 		w.write("Startparameters:\n");
 		w.write("velocity: " + Point.getVelocity() + " m/s");
 		w.write("\nDischarge height: " + Point.getHeight() + " m");
-		w.write("\nDischarge angle: " + Point.getAngle() + " degree");
+		w.write("\nDischarge angle: " + Point.getAngle() + " °");
 		w.write("\n\n");
 		w.write("Time,");
 		w.write("x-position,");
@@ -96,7 +96,7 @@ public class Flightdata extends SchieferWurf{
 		
 		try{
 			
-			File dir = new File("Askii-Pictures");
+			File dir = new File("Ascii-Pictures");
 			
 			dir.mkdir();
 			String[] dateien = dir.list();
@@ -106,7 +106,7 @@ public class Flightdata extends SchieferWurf{
 			if(dateien.length > 0)
 				k = (k*dateien.length)+1;
 			
-			File dateiOut = new File("Askii-Pictures" + "/" + "AskiiPic_" + k + ".txt");
+			File dateiOut = new File("Ascii-Pictures" + "/" + "AsciiPic_" + k + "_" +  Point.getVelocity() + "_"+ Point.getHeight() + "_" + Point.getAngle() + ".txt");
 			
 			dateiOut.createNewFile();
 			

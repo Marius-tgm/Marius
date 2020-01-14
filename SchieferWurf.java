@@ -60,8 +60,8 @@ public class SchieferWurf{
 		double g = Point.getG();
 		double a;
 		
-		velocityZ = velocity*Math.sin(angle*(Math.PI/180));				//vz bei Start
-		velocityX = velocity*Math.cos(angle*(Math.PI/180));				//vx ist ja gleich über den ganzen Zeitraum
+		velocityZ = velocity*Math.sin(angle*(Math.PI/180));				//vz at start
+		velocityX = velocity*Math.cos(angle*(Math.PI/180));				//vx
 		timeOfFlight = ((velocity*Math.sin(angle*(Math.PI/180)))/g) + Math.sqrt(((velocity*Math.sin(angle*(Math.PI/180)))/g)*((velocity*Math.sin(angle*(Math.PI/180)))/g)+((2*height)/g));
 		maxHeight = height+0.5*(((velocity*Math.sin(angle*(Math.PI/180)))*(velocity*Math.sin(angle*(Math.PI/180))))/g);
 		s = velocityX * timeOfFlight;
