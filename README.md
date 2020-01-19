@@ -1,4 +1,4 @@
-Throw.clas
+Throw.class
 This program simulates a throw. To start the programm you need to compile the file Throw.java. If the compiling finishes, you will be able to insert the parameters into the program. Open the projext with the command "java Throw".
 The program demands some parameters you need to enter. In the first instance, you must enter a velocity. This is the initial speed at the start of the throw.
 Then you must enter the starting height. You can choose an angle between -90° and 90°.
