@@ -1,6 +1,6 @@
 import java.io.*;
 
-public class Flightdata extends SchieferWurf{
+public class Flightdata extends Throw{
 	
 	double timeOfFlight;
 	double maxHeight;
@@ -65,7 +65,7 @@ public class Flightdata extends SchieferWurf{
 		w.write("Startparameters:\n");
 		w.write("velocity: " + Point.getVelocity() + " m/s");
 		w.write("\nDischarge height: " + Point.getHeight() + " m");
-		w.write("\nDischarge angle: " + Point.getAngle() + " °");
+		w.write("\nDischarge angle: " + Point.getAngle() + " degree");
 		w.write("\n\n");
 		w.write("Time,");
 		w.write("x-position,");
