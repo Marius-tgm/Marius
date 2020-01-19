@@ -6,6 +6,7 @@
 import java.math.RoundingMode;
 import java.math.BigDecimal;
 import java.util.Scanner;
+import java.lang.Integer;
 
 public class Throw{
 	
@@ -25,6 +26,7 @@ public class Throw{
 		boolean checkVelocity = false;
 		boolean checkHeight = false;
 		boolean checkAngle = false;
+		boolean parametersAtProgramStart = false;
 		int velocityTest = 0;
 		int heightTest = 0;
 		int angleTest = 0;
@@ -34,38 +36,61 @@ public class Throw{
 		Scanner startHeightInput = new Scanner(System.in);
 		Scanner angleInput = new Scanner(System.in);
 		
-		System.out.println("This program simulates a throw. It will be shown as an askii image after you entered the Parameters. \nThe results and the askii image will be saved in seperate files.");
+		System.out.println("This program simulates a throw. It will be shown as an ascii image after you entered the Parameters. \nThe results and the ascii image will be saved in seperate files.");
 		System.out.println("Please enter a velocity between 0 an 111 m/s, a discharge height between 0 and 10000 m and a discharge angle between 90 and -90 degree:");
 		
-		while(checkVelocity == false){
-			System.out.print("Velocity (m/s): ");				//User enters the paramters of the throw	
-			velocityTest = velocityInput.nextInt();	
-		
-			if(velocityTest < 112 && velocityTest > 0)
-				checkVelocity = true;
-				else
-					System.out.println("\nThe entered velocity is greater than 111 m/s or lower than 1 m/s - please enter a viable velocity for the throw.");
+		if(args.length == 3){
+			
+			parametersAtProgramStart = true;
+			velocityTest = Integer.parseInt(args[0]);
+			heightTest = Integer.parseInt(args[1]);
+			angleTest = Integer.parseInt(args[2]);	
 		}
-		
-		while(checkHeight == false){
-			System.out.print("\nDischarge height (m): ");			
-			heightTest = startHeightInput.nextInt();
-		
-			if(heightTest < 10001 && heightTest > 0)
-				checkHeight = true;
-				else
-					System.out.println("\nThe entered height is greater than 10000 m or lower than 1 m - please enter a viable height for the throw.");
-		}
-		
-		while(checkAngle == false){
-			System.out.print("\nDischarge angle (degree): ");			
-			angleTest = angleInput.nextInt();
-		
-			if(angleTest < 91 && angleTest > -90)
-				checkAngle = true;
-				else
-					System.out.println("\nThe entered angle is greater than 90 degree or lower than -90 degree - please enter a viable angle for the throw.");
-		}
+			
+			while(checkVelocity == false){
+				
+				if(parametersAtProgramStart == false){					//checks if the user entered the parameters while starting the program
+					System.out.print("Velocity (m/s): ");				//User enters the paramters of the throw	
+					velocityTest = velocityInput.nextInt();	
+				}
+				
+				if(velocityTest < 112 && velocityTest > 0)
+					checkVelocity = true;
+					else{
+						parametersAtProgramStart = false;
+						System.out.println("\nThe entered velocity is greater than 111 m/s or lower than 1 m/s - please enter a viable velocity for the throw.");
+					}
+			}
+			
+			while(checkHeight == false){
+				
+				if(parametersAtProgramStart == false){
+					System.out.print("\nDischarge height (m): ");			
+					heightTest = startHeightInput.nextInt();
+				}
+				
+				if(heightTest < 10001 && heightTest > 0)
+					checkHeight = true;
+					else{
+						parametersAtProgramStart = false;
+						System.out.println("\nThe entered height is greater than 10000 m or lower than 1 m - please enter a viable height for the throw.");
+					}
+			}
+			
+			while(checkAngle == false){
+				
+				if(parametersAtProgramStart == false){
+					System.out.print("\nDischarge angle (degree): ");			
+					angleTest = angleInput.nextInt();
+				}
+				
+				if(angleTest < 91 && angleTest > -90)
+					checkAngle = true;
+					else{
+						parametersAtProgramStart = false;
+						System.out.println("\nThe entered angle is greater than 90 degree or lower than -90 degree - please enter a viable angle for the throw.");
+					}
+			}
 		
 		Point p1 = new Point(velocityTest,heightTest,angleTest,0); //passing entered paramters to the point class
 		
